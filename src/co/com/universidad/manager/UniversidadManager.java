@@ -70,6 +70,50 @@ public class UniversidadManager {
         estudianteMateriaDao.crearEstudianteMateria(estudianteMateria);
     }
     
+    public void getMateria(int codigo, String nombre, String descripcion, int creditos){
+        
+        Materia materia = new Materia();
+        materia.setId(codigo);
+        materia.setNombre(nombre);
+        materia.setDescripcion(descripcion);
+        materia.setCreditos(creditos);
+        
+        materiaDao.getMateria(materia);
+        
+    }
+    
+    public void getProfesor(String identificacion, String nombre, Materia materia){
+        
+        Profesor profesor = new Profesor();
+        profesor.setIdentificacion(identificacion);
+        profesor.setNombre(nombre);
+        profesor.setMateria(materia);
+        
+        profesorDao.getProfesor(profesor);
+        
+    }
+    
+    public void getEstudiante(String numeroDocumento, String nombre, int semestre){
+        
+        Estudiante estudiante = new Estudiante();
+        estudiante.setIdentificacion(numeroDocumento);
+        estudiante.setNombre(nombre);
+        estudiante.setSemestre(semestre);
+        
+        estudianteDao.getEstudiante(estudiante);
+        
+    }
+    
+    public void getEstudianteMateria(Estudiante estudiante, Profesor profesor, ArrayList<Double> notas){
+    
+        EstudianteMateria estudianteMateria = new EstudianteMateria();
+        estudianteMateria.setEstudiante(estudiante);
+        estudianteMateria.setProfesor(profesor);
+        estudianteMateria.setNotas(notas);
+        
+        estudianteMateriaDao.getEstudianteMateria(estudianteMateria);
+    }
+    
     public void actualizarMateria(int codigo, String nombre, String descripcion, int creditos){
         
         Materia materia = new Materia();
@@ -113,5 +157,48 @@ public class UniversidadManager {
         
         estudianteMateriaDao.actualizarEstudianteMateria(estudianteMateria);
     }
+
+    public void eliminarMateria(int codigo, String nombre, String descripcion, int creditos){
+        
+        Materia materia = new Materia();
+        materia.setId(codigo);
+        materia.setNombre(nombre);
+        materia.setDescripcion(descripcion);
+        materia.setCreditos(creditos);
+        
+        materiaDao.eliminarMateria(materia);
+        
+    }
     
+    public void eliminarProfesor(String identificacion, String nombre, Materia materia){
+        
+        Profesor profesor = new Profesor();
+        profesor.setIdentificacion(identificacion);
+        profesor.setNombre(nombre);
+        profesor.setMateria(materia);
+        
+        profesorDao.eliminarProfesor(profesor);
+        
+    }
+    
+    public void eliminarEstudiante(String numeroDocumento, String nombre, int semestre){
+        
+        Estudiante estudiante = new Estudiante();
+        estudiante.setIdentificacion(numeroDocumento);
+        estudiante.setNombre(nombre);
+        estudiante.setSemestre(semestre);
+        
+        estudianteDao.eliminarEstudiante(estudiante);
+        
+    }
+    
+    public void eliminarEstudianteMateria(Estudiante estudiante, Profesor profesor, ArrayList<Double> notas){
+    
+        EstudianteMateria estudianteMateria = new EstudianteMateria();
+        estudianteMateria.setEstudiante(estudiante);
+        estudianteMateria.setProfesor(profesor);
+        estudianteMateria.setNotas(notas);
+        
+        estudianteMateriaDao.eliminarEstudianteMateria(estudianteMateria);
+    }
 }
