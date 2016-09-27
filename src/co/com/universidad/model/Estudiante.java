@@ -5,8 +5,6 @@
  */
 package co.com.universidad.model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author salim.castellanos

@@ -20,4 +20,39 @@ public class ProfesorDao {
         listaProfesores.add(profesor);
     }
     
+    public void getProfesor(Profesor profesor){
+            
+        for(int j = 0; j<listaProfesores.size(); j++ ){
+        
+            if(listaProfesores.get(j).getIdentificacion().equals(profesor.getIdentificacion())){
+            
+                listaProfesores.set(j, profesor);
+            
+            }
+        }
+    }
+    
+    public void actualizarProfesor(Profesor profesor){
+            
+        for(int j = 0; j<listaProfesores.size(); j++ ){
+        
+            if(listaProfesores.get(j).getIdentificacion().equals(profesor.getIdentificacion())){
+            
+                listaProfesores.set(j, profesor);
+            
+            }
+        }
+    }
+    
+    public void eliminarProfesor(Profesor profesor){
+            
+        for(int j = 0; j<listaProfesores.size(); j++ ){
+        
+            if(listaProfesores.get(j).getIdentificacion().equals(profesor.getIdentificacion())){
+            
+                listaProfesores.remove(j);
+            
+            }
+        }
+    }
 }

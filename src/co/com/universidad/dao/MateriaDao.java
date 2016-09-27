@@ -20,4 +20,39 @@ public class MateriaDao {
         listaMaterias.add(materia);  
     }
     
+    public void getMateria(Materia materia){
+            
+        for(int j = 0; j<listaMaterias.size(); j++ ){
+        
+            if(listaMaterias.get(j).getId() == (materia.getId())){
+            
+                listaMaterias.set(j, materia);
+            
+            }
+        }
+    }
+    
+    public void actualizarMateria(Materia materia){
+            
+        for(int j = 0; j<listaMaterias.size(); j++ ){
+        
+            if(listaMaterias.get(j).getId() == (materia.getId())){
+            
+                listaMaterias.set(j, materia);
+            
+            }
+        }
+    }
+    
+    public void eliminarMateria(Materia materia){
+            
+        for(int j = 0; j<listaMaterias.size(); j++ ){
+        
+            if(listaMaterias.get(j).getId() == (materia.getId())){
+            
+                listaMaterias.remove(j);
+            
+            }
+        }
+    }
 }

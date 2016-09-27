@@ -60,7 +60,7 @@ public class UniversidadManager {
         
     }
     
-    public void CrearEstudianteMateria(Estudiante estudiante, Profesor profesor, ArrayList<Double> notas){
+    public void crearEstudianteMateria(Estudiante estudiante, Profesor profesor, ArrayList<Double> notas){
     
         EstudianteMateria estudianteMateria = new EstudianteMateria();
         estudianteMateria.setEstudiante(estudiante);
@@ -68,6 +68,50 @@ public class UniversidadManager {
         estudianteMateria.setNotas(notas);
         
         estudianteMateriaDao.crearEstudianteMateria(estudianteMateria);
+    }
+    
+    public void actualizarMateria(int codigo, String nombre, String descripcion, int creditos){
+        
+        Materia materia = new Materia();
+        materia.setId(codigo);
+        materia.setNombre(nombre);
+        materia.setDescripcion(descripcion);
+        materia.setCreditos(creditos);
+        
+        materiaDao.actualizarMateria(materia);
+        
+    }
+    
+    public void actualizarProfesor(String identificacion, String nombre, Materia materia){
+        
+        Profesor profesor = new Profesor();
+        profesor.setIdentificacion(identificacion);
+        profesor.setNombre(nombre);
+        profesor.setMateria(materia);
+        
+        profesorDao.actualizarProfesor(profesor);
+        
+    }
+    
+    public void actualizarEstudiante(String numeroDocumento, String nombre, int semestre){
+        
+        Estudiante estudiante = new Estudiante();
+        estudiante.setIdentificacion(numeroDocumento);
+        estudiante.setNombre(nombre);
+        estudiante.setSemestre(semestre);
+        
+        estudianteDao.actualizarEstudiante(estudiante);
+        
+    }
+    
+    public void actualizarEstudianteMateria(Estudiante estudiante, Profesor profesor, ArrayList<Double> notas){
+    
+        EstudianteMateria estudianteMateria = new EstudianteMateria();
+        estudianteMateria.setEstudiante(estudiante);
+        estudianteMateria.setProfesor(profesor);
+        estudianteMateria.setNotas(notas);
+        
+        estudianteMateriaDao.actualizarEstudianteMateria(estudianteMateria);
     }
     
 }

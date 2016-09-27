@@ -20,6 +20,18 @@ public class EstudianteDao {
      listaEstudiantes.add(estudiante);   
     }
     
+    public void getEstudiante(Estudiante estudiante){
+            
+        for(int j = 0; j<listaEstudiantes.size(); j++ ){
+        
+            if(listaEstudiantes.get(j).getIdentificacion().equals(estudiante.getIdentificacion())){
+            
+                listaEstudiantes.set(j, estudiante);
+            
+            }
+        }
+    }
+    
     public void actualizarEstudiante(Estudiante estudiante){
             
         for(int j = 0; j<listaEstudiantes.size(); j++ ){
@@ -29,9 +41,19 @@ public class EstudianteDao {
                 listaEstudiantes.set(j, estudiante);
             
             }
-            
         }
+    }
     
+    public void eliminarEstudiante(Estudiante estudiante){
+            
+        for(int j = 0; j<listaEstudiantes.size(); j++ ){
+        
+            if(listaEstudiantes.get(j).getIdentificacion().equals(estudiante.getIdentificacion())){
+            
+                listaEstudiantes.remove(j);
+            
+            }
+        }
     }
     
     

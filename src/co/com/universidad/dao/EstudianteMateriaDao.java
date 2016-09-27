@@ -14,10 +14,45 @@ import java.util.ArrayList;
  */
 public class EstudianteMateriaDao {
     
-    private static ArrayList<EstudianteMateria> listaEstidianteMaterias = new ArrayList<>();
+    private static ArrayList<EstudianteMateria> listaEstudianteMaterias = new ArrayList<>();
     
     public void crearEstudianteMateria(EstudianteMateria estudianteMateria){
-        listaEstidianteMaterias.add(estudianteMateria);
+        listaEstudianteMaterias.add(estudianteMateria);
     }
     
+    public void getEstudianteMateria(EstudianteMateria estudiantemateria){
+            
+        for(int j = 0; j<listaEstudianteMaterias.size(); j++ ){
+        
+            if(listaEstudianteMaterias.get(j).getEstudiante().equals(estudiantemateria.getEstudiante())){
+            
+                listaEstudianteMaterias.set(j, estudiantemateria);
+            
+            }
+        }
+    }
+    
+    public void actualizarEstudianteMateria(EstudianteMateria estudiantemateria){
+            
+        for(int j = 0; j<listaEstudianteMaterias.size(); j++ ){
+        
+            if(listaEstudianteMaterias.get(j).getEstudiante().equals(estudiantemateria.getEstudiante())){
+            
+                listaEstudianteMaterias.set(j, estudiantemateria);
+            
+            }
+        }
+    }
+    
+    public void eliminarEstudianteMateria(EstudianteMateria estudiantemateria){
+            
+        for(int j = 0; j<listaEstudianteMaterias.size(); j++ ){
+        
+            if(listaEstudianteMaterias.get(j).getEstudiante().equals(estudiantemateria.getEstudiante())){
+            
+                listaEstudianteMaterias.remove(j);
+            
+            }
+        }
+    }
 }
