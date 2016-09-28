@@ -12,7 +12,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,9 +23,9 @@ import javax.swing.table.DefaultTableModel;
  * @author mateo
  */
 
-public class ProfesorForm extends JFrame{
+public class EstudianteForm extends JFrame{
     
-    public ProfesorForm() {
+    public EstudianteForm() {
         initComponents();
         ProfesorPnl pnlFondo = new ProfesorPnl();
         this.add(pnlFondo, BorderLayout.CENTER);
@@ -44,9 +43,6 @@ public class ProfesorForm extends JFrame{
         pack();
     }
     
-    public void cerrar(){
-        setVisible(false);
-    }
     
     public static void main(String args[]) {
         
@@ -61,7 +57,7 @@ public class ProfesorForm extends JFrame{
                     }
                 }
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(ProfesorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(EstudianteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         } else {
             try {
@@ -72,11 +68,11 @@ public class ProfesorForm extends JFrame{
                     }
                 }
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(ProfesorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(EstudianteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         
-        new ProfesorForm().setVisible(true);
+        new EstudianteForm().setVisible(true);
     }
 }
 
@@ -87,7 +83,6 @@ class ProfesorPnl extends javax.swing.JPanel {
      */
     
     ArrayList<Profesor> profesores = new ArrayList<>();
-    ArrayList<Materia> materias = new ArrayList<>();
     String col[] = {"Identificación", "Nombre", "Materia"};
     DefaultTableModel tableModel = new DefaultTableModel(col, 0);
     
@@ -96,7 +91,6 @@ class ProfesorPnl extends javax.swing.JPanel {
     public ProfesorPnl() {
         initComponents();
         cargarProfesores();
-        cargarComboBox();
     }
     
     private void cargarProfesores(){
@@ -116,19 +110,6 @@ class ProfesorPnl extends javax.swing.JPanel {
         }
         return resp;
 
-    }
-    
-    public void cargarComboBox(){
-        DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
-        cmbMaterias.setModel(mdlCombo);
-        if(materias != null){
-            mdlCombo.addElement("Selecione una materia");
-            for(Materia materia: materias){
-                mdlCombo.addElement(materia.getNombre());
-            }
-        } else {
-            mdlCombo.addElement("No hay materias registradas");
-        }
     }
 
     @Override
@@ -230,8 +211,8 @@ class ProfesorPnl extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -394,7 +375,7 @@ class ProfesorPnl extends javax.swing.JPanel {
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         new Main().setVisible(true);
-        new ProfesorForm().cerrar();
+        setVisible(false);
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void cmbMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMateriasActionPerformed
