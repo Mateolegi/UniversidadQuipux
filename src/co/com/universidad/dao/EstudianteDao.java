@@ -20,16 +20,26 @@ public class EstudianteDao {
      listaEstudiantes.add(estudiante);   
     }
     
-    public void getEstudiante(Estudiante estudiante){
-            
-        for(int j = 0; j<listaEstudiantes.size(); j++ ){
+    public ArrayList<Estudiante> getEstudiante(){
         
-            if(listaEstudiantes.get(j).getIdentificacion().equals(estudiante.getIdentificacion())){
+        return listaEstudiantes;
+    }
+    
+    public Estudiante getEstudiante(String id){
+        
+        Estudiante estudiante = new Estudiante();
             
-                listaEstudiantes.set(j, estudiante);
+        for(int i = 0; i<listaEstudiantes.size(); i++ ){
+        
+            if(listaEstudiantes.get(i).getIdentificacion().equals(id)){
+
+                estudiante.setIdentificacion(listaEstudiantes.get(i).getIdentificacion());
+                estudiante.setNombre(listaEstudiantes.get(i).getNombre());
+                estudiante.setSemestre(listaEstudiantes.get(i).getSemestre());
             
             }
         }
+        return estudiante;
     }
     
     public void actualizarEstudiante(Estudiante estudiante){
@@ -44,18 +54,16 @@ public class EstudianteDao {
         }
     }
     
-    public void eliminarEstudiante(Estudiante estudiante){
+    public Estudiante eliminarEstudiante(String id){
             
-        for(int j = 0; j<listaEstudiantes.size(); j++ ){
+        Estudiante materia = new Estudiante();
+        for(int i = 0; i<listaEstudiantes.size(); i++ ){
         
-            if(listaEstudiantes.get(j).getIdentificacion().equals(estudiante.getIdentificacion())){
-            
-                listaEstudiantes.remove(j);
+            if(listaEstudiantes.get(i).getIdentificacion().equals(id)){
+                listaEstudiantes.remove(i);
             
             }
         }
+        return materia;
     }
-    
-    
-    
 }

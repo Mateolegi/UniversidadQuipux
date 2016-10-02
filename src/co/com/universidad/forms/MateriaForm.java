@@ -1,127 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.com.universidad.forms;
 
 import co.com.universidad.manager.UniversidadManager;
 import co.com.universidad.model.Materia;
-import co.com.universidad.model.Profesor;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mateo
  */
-
-public class MateriaForm extends JFrame{
-    
-    public MateriaForm() {
-        initComponents();
-        ProfesorPnl pnlFondo = new ProfesorPnl();
-        this.add(pnlFondo, BorderLayout.CENTER);
-        this.pack();
-    }
-    
-    private void initComponents() {
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Profesores  |  Universidad Quipux");
-        setLocationRelativeTo(this);
-        setSize(1087, 643);
-        setResizable(false);
-
-        pack();
-    }
-    
-    
-    public static void main(String args[]) {
-        
-        String OS = System.getProperty("os.name");
-
-        if ("Linux".equals(OS)){
-            try {
-                for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                    if ("GTK".equals(info.getName())) {
-                        UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
-                }
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(MateriaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-        } else {
-            try {
-                for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                    if ("Windows".equals(info.getName())) {
-                        UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
-                }
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(MateriaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-        }
-        
-        new MateriaForm().setVisible(true);
-    }
-}
-
-class ProfesorPnl extends javax.swing.JPanel {
+public class MateriaForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form ProfesorForm
+     * Creates new form MateriaForm
      */
-    
-    ArrayList<Profesor> profesores = new ArrayList<>();
-    String col[] = {"Identificación", "Nombre", "Materia"};
-    DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-    
+    ArrayList<Materia> materias;
+    Materia materiaVO = new Materia();
     UniversidadManager um = new UniversidadManager();
-    
-    public ProfesorPnl() {
+    javax.swing.table.DefaultTableModel tableModel = new javax.swing.table.DefaultTableModel(
+            new Object[][]{}, new String[]{"Identificación", "Nombre", "Descripción", "Créditos"}) {
+        Class[] types = new Class[]{
+            java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+        };
+        boolean[] canEdit = new boolean[]{
+            false, false, false, false
+        };
+
+        public Class getColumnClass(int columnIndex) {
+            return types[columnIndex];
+        }
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit[columnIndex];
+        }
+    };
+
+    public MateriaForm() {
         initComponents();
-        cargarProfesores();
-    }
-    
-    private void cargarProfesores(){
-        tableModel.setColumnIdentifiers(col);
         jTable1.setModel(tableModel);
-        for (Profesor profesor : profesores) {
-            tableModel.addRow(new Object[]{profesor.getIdentificacion(), profesor.getNombre()});
-        }
-    }
-    
-    public boolean verificarDatoUnico(String Codigo) {
-        boolean resp = false;
-        for (Profesor profesor: profesores) {
-            if (profesor.getIdentificacion().equals(Codigo)) {
-                resp = true;
-            }
-        }
-        return resp;
+        materias = um.getMateria();
+        cargarMaterias();
 
     }
 
-    @Override
-    public void paintComponent(Graphics g){
-        Dimension tamanio = getSize();        
-        ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/co/com/universidad/images/frmForms.png"));
-        g.drawImage(imagenFondo.getImage(), 0, 0, tamanio.width, tamanio.height, null);
-        setOpaque(false);
-        
-        super.paintComponent(g);
+    private void cargarMaterias() {
+
+        for (Materia materia : materias) {
+            tableModel.addRow(new Object[]{materia.getId(), materia.getNombre(), materia.getDescripcion(), materia.getCreditos()});
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,34 +63,67 @@ class ProfesorPnl extends javax.swing.JPanel {
         txtIdentificacion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        txtDescripcion = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
-        lblMateria = new javax.swing.JLabel();
+        lblDescripcion = new javax.swing.JLabel();
+        lblDescripcion1 = new javax.swing.JLabel();
+        txtCreditos = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnInicio = new javax.swing.JButton();
-        cmbMaterias = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Profesor    |    Universidad Quipux");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblIdentificacion.setText("* Identificación");
+        getContentPane().add(lblIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
+        getContentPane().add(txtIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 210, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Identificación", "Nombre", "Descripción", "Créditos"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setSelectionBackground(new java.awt.Color(22, 160, 133));
         jScrollPane1.setViewportView(jTable1);
 
-        lblNombre.setText("* Nombre");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 1027, 266));
+        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 210, 30));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 210, 30));
 
-        lblMateria.setText("* Materia");
+        lblNombre.setText("* Nombre");
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 30));
+
+        lblDescripcion.setText("* Descripción");
+        getContentPane().add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, 30));
+
+        lblDescripcion1.setText("* Créditos");
+        getContentPane().add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, -1, 30));
+        getContentPane().add(txtCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 210, 30));
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnCrear.png"))); // NOI18N
         btnCrear.setBorder(null);
@@ -171,6 +132,7 @@ class ProfesorPnl extends javax.swing.JPanel {
                 btnCrearActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, -1, -1));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnBuscar.png"))); // NOI18N
         btnBuscar.setBorder(null);
@@ -179,22 +141,27 @@ class ProfesorPnl extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 550, -1, -1));
 
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnActualizar.png"))); // NOI18N
         btnActualizar.setBorder(null);
+        btnActualizar.setEnabled(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, -1, -1));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnEliminar.png"))); // NOI18N
         btnEliminar.setBorder(null);
+        btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 550, -1, -1));
 
         btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnInicio.png"))); // NOI18N
         btnInicio.setBorder(null);
@@ -203,84 +170,12 @@ class ProfesorPnl extends javax.swing.JPanel {
                 btnInicioActionPerformed(evt);
             }
         });
+        getContentPane().add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 160, -1));
 
-        cmbMaterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbMaterias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMateriasActionPerformed(evt);
-            }
-        });
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/frmForms.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1087, 643));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre)
-                            .addComponent(lblMateria))
-                        .addGap(106, 106, 106)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(cmbMaterias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIdentificacion)
-                        .addGap(79, 79, 79)
-                        .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1027, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(115, 115, 115))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblMateria, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(cmbMaterias))
-                        .addGap(38, 38, 38)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(418, 418, 418)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
@@ -288,41 +183,73 @@ class ProfesorPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor ingrese la identificación");
             return;
         }
-        if(verificarDatoUnico(txtIdentificacion.getText())){
-            JOptionPane.showMessageDialog(null, "La cédula ya está registrada");
-            return;
-        }
         if (txtNombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre");
             return;
         }
-        if (cmbMaterias.getSelectedItem().toString().equals("Seleccione la materia")) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese la materia");
+        if (txtDescripcion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la descripción");
             return;
         }
-        
-        String id = txtIdentificacion.getText();
+        if (txtCreditos.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese los créditos");
+            return;
+        }
+
+        int id = Integer.parseInt(txtIdentificacion.getText());
         String nombre = txtNombre.getText();
-        Materia materia = (Materia) cmbMaterias.getSelectedItem();
-        
-        um.crearProfesor(id, nombre, materia);
-        
+        String descripcion = txtDescripcion.getText();
+        int creditos = Integer.parseInt(txtCreditos.getText());
+
+        try {
+            materiaVO = new Materia();
+            materiaVO.setId(id);
+            materiaVO.setNombre(nombre);
+            materiaVO.setDescripcion(descripcion);
+            materiaVO.setCreditos(creditos);
+
+            um.crearMateria(id, nombre, descripcion, creditos);
+
+            tableModel.addRow(new Object[]{materiaVO.getId(), materiaVO.getNombre(), materiaVO.getDescripcion(), materiaVO.getCreditos()});
+
+            txtIdentificacion.setText("");
+            txtDescripcion.setText("");
+            txtNombre.setText("");
+            txtCreditos.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar.\nError " + e, "Error", ERROR);
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
         if (txtIdentificacion.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese la identificación");
-            return;
+            JOptionPane.showMessageDialog(null, "Ingrese la identificación");
+        } else {
+
+            int id = Integer.parseInt(txtIdentificacion.getText());
+            materiaVO = um.getMateria(id);
+
+            txtNombre.setText(materiaVO.getNombre());
+            txtDescripcion.setText(materiaVO.getDescripcion());
+            txtCreditos.setText(Integer.toString(materiaVO.getCreditos()));
+
+            btnActualizar.setEnabled(true);
+            btnCrear.setEnabled(false);
+            btnEliminar.setEnabled(true);
+
+            if (txtDescripcion.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, id + " no existe");
+                txtIdentificacion.setText("");
+                txtDescripcion.setText("");
+                txtNombre.setText("");
+                txtCreditos.setText("");
+
+                btnActualizar.setEnabled(false);
+                btnCrear.setEnabled(true);
+                btnEliminar.setEnabled(false);
+            }
         }
-        if(!verificarDatoUnico(txtIdentificacion.getText())){
-            JOptionPane.showMessageDialog(null, "La cédula no está registrada");
-            return;
-        }
-        String id = txtIdentificacion.getText();
-        String nombre = txtNombre.getText();
-        Materia materia = (Materia) cmbMaterias.getSelectedItem();
-        
-        um.getProfesor(id, nombre, materia);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -330,47 +257,83 @@ class ProfesorPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Por favor ingrese la identificación");
             return;
         }
-        if(!verificarDatoUnico(txtIdentificacion.getText())){
-            JOptionPane.showMessageDialog(null, "La cédula no está registrada");
-            return;
-        }
         if (txtNombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre");
             return;
         }
-        if (cmbMaterias.getSelectedItem().toString().equals("Seleccione la materia")) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese la materia");
+        if (txtDescripcion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la descripción");
             return;
         }
-        String id = txtIdentificacion.getText();
+        if (txtCreditos.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese los créditos");
+            return;
+        }
+
+        int id = Integer.parseInt(txtIdentificacion.getText());
         String nombre = txtNombre.getText();
-        Materia materia = (Materia) cmbMaterias.getSelectedItem();
-        
-        um.actualizarProfesor(id, nombre, materia);
+        String descripcion = txtDescripcion.getText();
+        int creditos = Integer.parseInt(txtCreditos.getText());
+
+        try {
+            materiaVO.setId(id);
+            materiaVO.setNombre(nombre);
+            materiaVO.setDescripcion(descripcion);
+            materiaVO.setCreditos(creditos);
+
+            um.actualizarMateria(id, nombre, descripcion, creditos);
+
+            String cod = txtIdentificacion.getText();
+            int pos = 0;
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                if (jTable1.getValueAt(i, 0).toString().equals(cod)) {
+                    pos = i;
+                }
+            }
+            jTable1.setValueAt(materiaVO.getNombre(), pos, 1);
+            jTable1.setValueAt(materiaVO.getDescripcion(), pos, 2);
+            jTable1.setValueAt(materiaVO.getCreditos(), pos, 3);
+
+            txtIdentificacion.setText("");
+            txtDescripcion.setText("");
+            txtNombre.setText("");
+            txtCreditos.setText("");
+
+            btnCrear.setEnabled(true);
+            btnActualizar.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar.\nError " + e, "Error", ERROR);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (txtIdentificacion.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese la identificación");
-            return;
+            JOptionPane.showMessageDialog(null, "Ingrese la identificación", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int id = Integer.parseInt(txtIdentificacion.getText());
+
+            int conf = JOptionPane.showConfirmDialog(null, "Seguro quieres eliminar la materia " + id);
+            if (conf == JOptionPane.YES_OPTION) {
+                um.eliminarMateria(id);
+                btnActualizar.setEnabled(false);
+                btnCrear.setEnabled(true);
+                btnEliminar.setEnabled(false);
+
+                String cod = txtIdentificacion.getText();
+                int pos = 0;
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+                    if (jTable1.getValueAt(i, 0).toString().equals(cod)) {
+                        pos = i;
+                    }
+                }
+                tableModel.removeRow(pos);
+            } else if (conf == JOptionPane.NO_OPTION) {
+                btnActualizar.setEnabled(false);
+                btnCrear.setEnabled(true);
+                btnEliminar.setEnabled(false);
+            }
+
         }
-        if(!verificarDatoUnico(txtIdentificacion.getText())){
-            JOptionPane.showMessageDialog(null, "La cédula ya está registrada");
-            return;
-        }
-        if (txtNombre.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre");
-            return;
-        }
-        if (cmbMaterias.getSelectedItem().toString().equals("Seleccione la materia")) {
-            JOptionPane.showMessageDialog(null, "Por favor ingrese la materia");
-            return;
-        }
-        String id = txtIdentificacion.getText();
-        String nombre = txtNombre.getText();
-        Materia materia = (Materia) cmbMaterias.getSelectedItem();
-        
-        um.eliminarProfesor(id, nombre, materia);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
@@ -378,10 +341,37 @@ class ProfesorPnl extends javax.swing.JPanel {
         setVisible(false);
     }//GEN-LAST:event_btnInicioActionPerformed
 
-    private void cmbMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMateriasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbMateriasActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MateriaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
 
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MateriaForm().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -389,12 +379,15 @@ class ProfesorPnl extends javax.swing.JPanel {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInicio;
-    private javax.swing.JComboBox<String> cmbMaterias;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblDescripcion1;
     private javax.swing.JLabel lblIdentificacion;
-    private javax.swing.JLabel lblMateria;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JTextField txtCreditos;
+    private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

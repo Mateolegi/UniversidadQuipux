@@ -1,61 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.com.universidad.forms;
-
-import java.awt.*;
-import javax.swing.*;
 
 /**
  *
  * @author mateo
  */
-
-public class Main extends JFrame{
-    
-    public Main() {
-        initComponents();
-        MainPnl pnlFondo = new MainPnl();
-        this.add(pnlFondo, BorderLayout.CENTER);
-        this.pack();
-    }
-    
-    private void initComponents() {
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Universidad Quipux");
-        setLocationRelativeTo(this);
-        setSize(1087, 643);
-        setResizable(false);
-
-        pack();
-    }
-    
-    
-    public static void main(String args[]) {
-        new Main().setVisible(true);
-    }
-}
-
-class MainPnl extends JPanel {
+public class Main extends javax.swing.JFrame {
 
     /**
-     * Creates new form Main
+     * Creates new form MainForm
      */
-    public MainPnl() {
+    public Main() {
         initComponents();
-    }
-    
-    @Override
-    public void paintComponent(Graphics g){
-        Dimension tamanio = getSize();        
-        ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/co/com/universidad/images/frmMainA.png"));
-        g.drawImage(imagenFondo.getImage(), 0, 0, tamanio.width, tamanio.height, null);
-        setOpaque(false);
-        
-        super.paintComponent(g);
     }
 
     /**
@@ -69,10 +24,14 @@ class MainPnl extends JPanel {
 
         btnEstudiantes = new javax.swing.JButton();
         btnProfesores = new javax.swing.JButton();
-        btnMaterias = new javax.swing.JButton();
         btnNotas = new javax.swing.JButton();
+        btnMaterias = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Universidad Quipux");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEstudiantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnEstudiantes.png"))); // NOI18N
         btnEstudiantes.setBorder(null);
@@ -81,55 +40,96 @@ class MainPnl extends JPanel {
                 btnEstudiantesActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
         btnProfesores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnProfesores.png"))); // NOI18N
         btnProfesores.setBorder(null);
-
-        btnMaterias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnMaterias.png"))); // NOI18N
-        btnMaterias.setBorder(null);
+        btnProfesores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfesoresActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnProfesores, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, -1, -1));
 
         btnNotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnNotas.png"))); // NOI18N
         btnNotas.setBorder(null);
+        btnNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEstudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(200, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(279, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEstudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(103, 103, 103))
-        );
+        btnMaterias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnMaterias.png"))); // NOI18N
+        btnMaterias.setBorder(null);
+        btnMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMateriasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/frmMainA.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudiantesActionPerformed
-        // TODO add your handling code here:
+        new EstudianteForm().setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_btnEstudiantesActionPerformed
 
+    private void btnProfesoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfesoresActionPerformed
+        new ProfesorForm().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnProfesoresActionPerformed
+
+    private void btnMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateriasActionPerformed
+        new MateriaForm().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnMateriasActionPerformed
+
+    private void btnNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotasActionPerformed
+        new EstudianteMateriaForm().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnNotasActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Main().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEstudiantes;
     private javax.swing.JButton btnMaterias;
     private javax.swing.JButton btnNotas;
     private javax.swing.JButton btnProfesores;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

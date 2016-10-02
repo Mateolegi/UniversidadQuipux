@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  *
  * @author mateo
  */
-public class ProfesorForm extends javax.swing.JFrame {
+public class EstudianteMateriaForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ProfesorForm
@@ -17,7 +17,7 @@ public class ProfesorForm extends javax.swing.JFrame {
     Profesor profesorVO = new Profesor();
     UniversidadManager um = new UniversidadManager();
 
-    public ProfesorForm() {
+    public EstudianteMateriaForm() {
         initComponents();
         btnActualizar.setVisible(false);
     }
@@ -43,15 +43,14 @@ public class ProfesorForm extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnInicio = new javax.swing.JButton();
-        cmbMaterias = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Profesor (No funciona aún)    |    Universidad Quipux");
+        setTitle("Notas (No funciona aún)    |    Universidad Quipux");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIdentificacion.setText("* Identificación");
+        lblIdentificacion.setText("* Estudiante");
         getContentPane().add(lblIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
         getContentPane().add(txtIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 210, 30));
 
@@ -60,11 +59,11 @@ public class ProfesorForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificación", "Nombre", "Materia"
+                "Estudiante", "Profesor", "Nota"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -84,10 +83,10 @@ public class ProfesorForm extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 1027, 266));
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 210, 30));
 
-        lblNombre.setText("* Nombre");
+        lblNombre.setText("* Profesor");
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 30));
 
-        lblMateria.setText("* Materia");
+        lblMateria.setText("* Nota");
         getContentPane().add(lblMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, 30));
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/btnCrear.png"))); // NOI18N
@@ -135,14 +134,6 @@ public class ProfesorForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 160, -1));
-
-        cmbMaterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbMaterias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMateriasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cmbMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 210, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/com/universidad/images/frmForms.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1087, 643));
@@ -270,10 +261,6 @@ public class ProfesorForm extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_btnInicioActionPerformed
 
-    private void cmbMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMateriasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbMateriasActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -291,8 +278,9 @@ public class ProfesorForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfesorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EstudianteMateriaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -300,7 +288,7 @@ public class ProfesorForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfesorForm().setVisible(true);
+                new EstudianteMateriaForm().setVisible(true);
             }
         });
     }
@@ -311,7 +299,6 @@ public class ProfesorForm extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInicio;
-    private javax.swing.JComboBox<String> cmbMaterias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

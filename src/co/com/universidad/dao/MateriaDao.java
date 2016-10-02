@@ -20,23 +20,33 @@ public class MateriaDao {
         listaMaterias.add(materia);  
     }
     
-    public void getMateria(Materia materia){
-            
-        for(int j = 0; j<listaMaterias.size(); j++ ){
+    public ArrayList<Materia> getMateria(){
+        return listaMaterias;
+    }
+    
+    public Materia getMateria(int id){
         
-            if(listaMaterias.get(j).getId() == (materia.getId())){
+        Materia materia = new Materia();
             
-                listaMaterias.set(j, materia);
+        for(int i = 0; i<listaMaterias.size(); i++ ){
+        
+            if(listaMaterias.get(i).getId() == id){
+
+                materia.setId(listaMaterias.get(i).getId());
+                materia.setNombre(listaMaterias.get(i).getNombre());
+                materia.setDescripcion(listaMaterias.get(i).getDescripcion());
+                materia.setCreditos(listaMaterias.get(i).getCreditos());
             
             }
         }
+        return materia;
     }
     
     public void actualizarMateria(Materia materia){
             
         for(int j = 0; j<listaMaterias.size(); j++ ){
         
-            if(listaMaterias.get(j).getId() == (materia.getId())){
+            if(listaMaterias.get(j).getId() == materia.getId()){
             
                 listaMaterias.set(j, materia);
             
@@ -44,15 +54,16 @@ public class MateriaDao {
         }
     }
     
-    public void eliminarMateria(Materia materia){
+    public Materia eliminarMateria(int id){
             
+        Materia materia = new Materia();
         for(int j = 0; j<listaMaterias.size(); j++ ){
         
-            if(listaMaterias.get(j).getId() == (materia.getId())){
-            
+            if(listaMaterias.get(j).getId() == id){
                 listaMaterias.remove(j);
             
             }
         }
+        return materia;
     }
 }

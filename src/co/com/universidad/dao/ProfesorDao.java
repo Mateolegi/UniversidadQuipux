@@ -20,16 +20,23 @@ public class ProfesorDao {
         listaProfesores.add(profesor);
     }
     
-    public void getProfesor(Profesor profesor){
-            
-        for(int j = 0; j<listaProfesores.size(); j++ ){
+    public ArrayList<Profesor> getProfesor(){
+        return listaProfesores;
+    }
+    
+    public Profesor getProfesor(String id){
         
-            if(listaProfesores.get(j).getIdentificacion().equals(profesor.getIdentificacion())){
+        Profesor profesor = new Profesor();
             
-                listaProfesores.set(j, profesor);
+        for(int i = 0; i<listaProfesores.size(); i++ ){
+        
+            if(listaProfesores.get(i).getIdentificacion().equals(id)){
+                            
+                listaProfesores.set(i, profesor);
             
             }
         }
+        return profesor;
     }
     
     public void actualizarProfesor(Profesor profesor){
@@ -44,15 +51,16 @@ public class ProfesorDao {
         }
     }
     
-    public void eliminarProfesor(Profesor profesor){
+    public Profesor eliminarProfesor(String id){
             
+        Profesor profesor = new Profesor();
         for(int j = 0; j<listaProfesores.size(); j++ ){
         
-            if(listaProfesores.get(j).getIdentificacion().equals(profesor.getIdentificacion())){
-            
+            if(listaProfesores.get(j).getIdentificacion().equals(id)){
                 listaProfesores.remove(j);
             
             }
         }
+        return profesor;
     }
 }

@@ -20,6 +20,10 @@ public class EstudianteMateriaDao {
         listaEstudianteMaterias.add(estudianteMateria);
     }
     
+    public ArrayList<EstudianteMateria> getEstudianteMateria(){
+        return listaEstudianteMaterias;
+    }
+    
     public void getEstudianteMateria(EstudianteMateria estudiantemateria){
             
         for(int j = 0; j<listaEstudianteMaterias.size(); j++ ){
