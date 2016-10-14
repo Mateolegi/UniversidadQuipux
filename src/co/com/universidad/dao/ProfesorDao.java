@@ -32,7 +32,9 @@ public class ProfesorDao {
         
             if(listaProfesores.get(i).getIdentificacion().equals(id)){
                             
-                listaProfesores.set(i, profesor);
+                profesor.setIdentificacion(listaProfesores.get(i).getIdentificacion());
+                profesor.setNombre(listaProfesores.get(i).getNombre());
+                profesor.setMateria(listaProfesores.get(i).getMateria());
             
             }
         }

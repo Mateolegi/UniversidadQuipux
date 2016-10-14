@@ -169,8 +169,8 @@ public class UniversidadManager {
         
     }
     
-    public EstudianteMateria eliminarEstudianteMateria(Estudiante estudiante, Profesor profesor){
+    public void eliminarEstudianteMateria(Estudiante estudiante, Profesor profesor){
 
-        return estudianteMateriaDao.eliminarEstudianteMateria(estudiante, profesor);
+        estudianteMateriaDao.eliminarEstudianteMateria(estudiante, profesor);
     }
 }
