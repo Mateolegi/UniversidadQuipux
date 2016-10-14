@@ -97,7 +97,7 @@ public class EstudianteMateriaForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Notas (No funciona aún)    |    Universidad Quipux");
+        setTitle("Notas    |    Universidad Quipux");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -86,7 +86,7 @@ public class ProfesorForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Profesor (No funciona aún)    |    Universidad Quipux");
+        setTitle("Profesor    |    Universidad Quipux");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
